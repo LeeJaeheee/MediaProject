@@ -9,8 +9,8 @@ import UIKit
 
 @objc protocol ConfigureProtocol {
     func configureHierarchy()
-    func configureView()
     func configureLayout()
+    func configureView()
 }
 
 @objc protocol VCProtocol: ConfigureProtocol {

@@ -21,6 +21,12 @@
 		D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8392B68E389002DCFD5 /* TVViewController.swift */; };
 		D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B83C2B68E3EB002DCFD5 /* ReusableProtocol.swift */; };
 		D2F1B83F2B68E3FE002DCFD5 /* ConfigureProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */; };
+		D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8402B68E802002DCFD5 /* TMDBAPIManager.swift */; };
+		D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8422B68EAA5002DCFD5 /* APIKey.swift */; };
+		D2F1B8452B68ECCA002DCFD5 /* TVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */; };
+		D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */; };
+		D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */; };
+		D2F1B84D2B6909F4002DCFD5 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = D2F1B84C2B6909F4002DCFD5 /* Cosmos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +42,11 @@
 		D2F1B8392B68E389002DCFD5 /* TVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewController.swift; sourceTree = "<group>"; };
 		D2F1B83C2B68E3EB002DCFD5 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureProtocol.swift; sourceTree = "<group>"; };
+		D2F1B8402B68E802002DCFD5 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
+		D2F1B8422B68EAA5002DCFD5 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVModel.swift; sourceTree = "<group>"; };
+		D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
+		D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F1B84D2B6909F4002DCFD5 /* Cosmos in Frameworks */,
 				D2F1B8322B68E1FC002DCFD5 /* SnapKit in Frameworks */,
 				D2F1B82C2B68E1EA002DCFD5 /* Kingfisher in Frameworks */,
 				D2F1B82F2B68E1F3002DCFD5 /* Alamofire in Frameworks */,
@@ -73,6 +85,7 @@
 		D2F1B8152B68E1D0002DCFD5 /* MediaProject */ = {
 			isa = PBXGroup;
 			children = (
+				D2F1B8482B68FD0B002DCFD5 /* CustomView */,
 				D2F1B83B2B68E3CC002DCFD5 /* Resource */,
 				D2F1B8382B68E336002DCFD5 /* TV */,
 				D2F1B8372B68E30E002DCFD5 /* Network */,
@@ -90,6 +103,9 @@
 		D2F1B8372B68E30E002DCFD5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D2F1B8402B68E802002DCFD5 /* TMDBAPIManager.swift */,
+				D2F1B8422B68EAA5002DCFD5 /* APIKey.swift */,
+				D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -98,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				D2F1B8392B68E389002DCFD5 /* TVViewController.swift */,
+				D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */,
+				D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -109,6 +127,13 @@
 				D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		D2F1B8482B68FD0B002DCFD5 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +157,7 @@
 				D2F1B82E2B68E1F3002DCFD5 /* Alamofire */,
 				D2F1B8312B68E1FC002DCFD5 /* SnapKit */,
 				D2F1B8332B68E1FC002DCFD5 /* SnapKit-Dynamic */,
+				D2F1B84C2B6909F4002DCFD5 /* Cosmos */,
 			);
 			productName = MediaProject;
 			productReference = D2F1B8132B68E1D0002DCFD5 /* MediaProject.app */;
@@ -165,6 +191,7 @@
 				D2F1B82A2B68E1EA002DCFD5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D2F1B82D2B68E1F3002DCFD5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D2F1B8302B68E1FC002DCFD5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D2F1B84B2B6909F4002DCFD5 /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = D2F1B8142B68E1D0002DCFD5 /* Products */;
 			projectDirPath = "";
@@ -196,9 +223,14 @@
 			files = (
 				D2F1B83F2B68E3FE002DCFD5 /* ConfigureProtocol.swift in Sources */,
 				D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */,
+				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
+				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
 				D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
+				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,
+				D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */,
+				D2F1B8452B68ECCA002DCFD5 /* TVModel.swift in Sources */,
 				D2F1B8192B68E1D0002DCFD5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +488,14 @@
 				minimumVersion = 5.7.0;
 			};
 		};
+		D2F1B84B2B6909F4002DCFD5 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -478,6 +518,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2F1B8302B68E1FC002DCFD5 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		D2F1B84C2B6909F4002DCFD5 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2F1B84B2B6909F4002DCFD5 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
