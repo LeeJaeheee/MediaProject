@@ -134,5 +134,11 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
         
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = TVDetailViewController()
+        vc.id = list[collectionView.tag][indexPath.item].id
+        present(vc, animated: true)
+    }
     
 }

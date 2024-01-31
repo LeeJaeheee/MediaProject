@@ -37,26 +37,28 @@ class TVDetailViewController: BaseViewController {
     var tvDetail: TVDetailModel?
     var castList: [Cast] = []
     var recommendList: [TVResult] = []
-
+    
+    var id: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let group = DispatchGroup()
         
         group.enter()
-        tmdbManager.fetchTVDetail(id: 96648) { result in
+        tmdbManager.fetchTVDetail(id: id) { result in
             self.tvDetail = result
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchCredits(id: 96648) { result in
+        tmdbManager.fetchCredits(id: id) { result in
             self.castList = result
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchTV(url: "tv/96648/recommendations") { result in
+        tmdbManager.fetchTV(url: "tv/\(id)/recommendations") { result in
             self.recommendList = result
             group.leave()
         }
