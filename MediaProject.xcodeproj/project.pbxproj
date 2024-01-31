@@ -28,6 +28,11 @@
 		D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */; };
 		D2F1B84D2B6909F4002DCFD5 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = D2F1B84C2B6909F4002DCFD5 /* Cosmos */; };
 		D2F1B8592B6A1899002DCFD5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */; };
+		D2F1B85C2B6AC1D8002DCFD5 /* TVDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B85B2B6AC1D8002DCFD5 /* TVDetailViewController.swift */; };
+		D2F1B85E2B6AE580002DCFD5 /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B85D2B6AE580002DCFD5 /* OverviewTableViewCell.swift */; };
+		D2F1B8602B6AE768002DCFD5 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B85F2B6AE768002DCFD5 /* CastTableViewCell.swift */; };
+		D2F1B8622B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */; };
+		D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +54,11 @@
 		D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
 		D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D2F1B85B2B6AC1D8002DCFD5 /* TVDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailViewController.swift; sourceTree = "<group>"; };
+		D2F1B85D2B6AE580002DCFD5 /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
+		D2F1B85F2B6AE768002DCFD5 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
+		D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
+		D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +128,7 @@
 				D2F1B8392B68E389002DCFD5 /* TVViewController.swift */,
 				D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */,
 				D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */,
+				D2F1B85B2B6AC1D8002DCFD5 /* TVDetailViewController.swift */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -135,6 +146,10 @@
 		D2F1B8482B68FD0B002DCFD5 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				D2F1B85D2B6AE580002DCFD5 /* OverviewTableViewCell.swift */,
+				D2F1B85F2B6AE768002DCFD5 /* CastTableViewCell.swift */,
+				D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */,
+				D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -228,11 +243,16 @@
 				D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */,
 				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
 				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
+				D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */,
+				D2F1B85E2B6AE580002DCFD5 /* OverviewTableViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
 				D2F1B8592B6A1899002DCFD5 /* BaseViewController.swift in Sources */,
 				D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */,
+				D2F1B85C2B6AC1D8002DCFD5 /* TVDetailViewController.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
 				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,
+				D2F1B8602B6AE768002DCFD5 /* CastTableViewCell.swift in Sources */,
+				D2F1B8622B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift in Sources */,
 				D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */,
 				D2F1B8452B68ECCA002DCFD5 /* TVModel.swift in Sources */,
 				D2F1B8192B68E1D0002DCFD5 /* SceneDelegate.swift in Sources */,

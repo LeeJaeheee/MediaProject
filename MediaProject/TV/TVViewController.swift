@@ -42,13 +42,15 @@ class TVViewController: BaseViewController {
     
     let tableView = UITableView()
     
+    let tmdbManager = TMDBAPIManager.shared
+    
     var list: [[TVResult]] = Array(repeating: [], count: TVType.allCases.count)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         TVType.allCases.enumerated().forEach { i, type in
-            TMDBAPIManager.share.fetchTV(url: type.url) { result in
+            tmdbManager.fetchTV(url: type.url) { result in
                 self.list[i] = result
                 self.tableView.reloadData()
             }
@@ -119,7 +121,7 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let item = list[collectionView.tag][indexPath.item]
         
         if let poster = item.poster {
-            let url = URL(string: "https://image.tmdb.org/t/p/w500\(poster)")
+            let url = URL(string: "\(tmdbManager.imageBaseURL)\(poster)")
             cell.posterImageView.kf.setImage(with: url)
         } else {
             cell.posterImageView.image = UIImage(systemName: "xmark")
