@@ -27,6 +27,7 @@
 		D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */; };
 		D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */; };
 		D2F1B84D2B6909F4002DCFD5 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = D2F1B84C2B6909F4002DCFD5 /* Cosmos */; };
+		D2F1B8592B6A1899002DCFD5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVModel.swift; sourceTree = "<group>"; };
 		D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
 		D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				D2F1B83C2B68E3EB002DCFD5 /* ReusableProtocol.swift */,
 				D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */,
+				D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
 				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
+				D2F1B8592B6A1899002DCFD5 /* BaseViewController.swift in Sources */,
 				D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
 				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,

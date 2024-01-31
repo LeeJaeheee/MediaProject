@@ -38,7 +38,7 @@ enum TVType: Int, CaseIterable {
     }
 }
 
-class TVViewController: UIViewController {
+class TVViewController: BaseViewController {
     
     let tableView = UITableView()
     
@@ -46,10 +46,6 @@ class TVViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureLayout()
-        configureView()
         
         TVType.allCases.enumerated().forEach { i, type in
             TMDBAPIManager.share.fetchTV(url: type.url) { result in
@@ -60,24 +56,24 @@ class TVViewController: UIViewController {
 
     }
     
-}
-
-extension TVViewController: VCProtocol, TableViewProtocol {
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(tableView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func configureView() {
+    override func configureView() {
         view.backgroundColor = .systemBackground
         configureTableView()
     }
+    
+}
+
+extension TVViewController: TableViewProtocol {
     
     func configureTableView() {
         tableView.separatorStyle = .none

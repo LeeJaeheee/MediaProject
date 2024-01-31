@@ -13,12 +13,12 @@ class TMDBAPIManager {
     static let share = TMDBAPIManager()
     
     let baseURL = "https://api.themoviedb.org/3/"
-    let language = "ko-KR"
+
+    let parameter: Parameters = ["language": "ko-KR"]
+    let header: HTTPHeaders = ["Authorization": APIKey.tmdb]
     
     func fetchTV(url: String, completionHandler: @escaping ([TVResult]) -> Void) {
         let url = baseURL + url
-        let parameter: Parameters = ["language": language]
-        let header: HTTPHeaders = ["Authorization": APIKey.tmdb]
         
         AF.request(url, parameters: parameter, headers: header).responseDecodable(of: TVModel.self) { response in
             switch response.result {
