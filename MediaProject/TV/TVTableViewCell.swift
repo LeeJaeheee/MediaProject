@@ -7,7 +7,9 @@
 
 import UIKit
 
-class TVTableViewCell: UITableViewCell, ConfigureProtocol, CollectionViewProtocol {
+class TVTableViewCell: UITableViewCell, ConfigureProtocol {
+    
+    static var type: TMDBAPI = .trending
     
     let titleLabel = UILabel()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
@@ -39,7 +41,7 @@ class TVTableViewCell: UITableViewCell, ConfigureProtocol, CollectionViewProtoco
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.bottom.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(TVTableViewCell.type == .topRated ? 300 : 200)
         }
     }
     
@@ -57,10 +59,13 @@ class TVTableViewCell: UITableViewCell, ConfigureProtocol, CollectionViewProtoco
     }
     
     func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        print(TVTableViewCell.type)
+        print(#function)
         let spacing: CGFloat = 16
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 200)
+        layout.itemSize = TVTableViewCell.type == .topRated ? CGSize(width: 150, height: 300) : CGSize(width: 100, height: 200)
+        print(layout.itemSize)
         layout.minimumInteritemSpacing = spacing
         return layout
     }

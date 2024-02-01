@@ -9,34 +9,34 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-enum TVType: Int, CaseIterable {
-    
-    case trending
-    case topRated
-    case popular
-    
-    var title: String {
-        switch self {
-        case .trending:
-            return "추천 TV 콘텐츠"
-        case .topRated:
-            return "TOP 20 TV 콘텐츠"
-        case .popular:
-            return "인기 TV 콘텐츠"
-        }
-    }
-    
-    var url: String {
-        switch self {
-        case .trending:
-            "trending/tv/day"
-        case .topRated:
-            "tv/top_rated"
-        case .popular:
-            "tv/popular"
-        }
-    }
-}
+//enum TVType: Int, CaseIterable {
+//    
+//    case trending
+//    case topRated
+//    case popular
+//    
+//    var title: String {
+//        switch self {
+//        case .trending:
+//            return "추천 TV 콘텐츠"
+//        case .topRated:
+//            return "TOP 20 TV 콘텐츠"
+//        case .popular:
+//            return "인기 TV 콘텐츠"
+//        }
+//    }
+//    
+//    var url: String {
+//        switch self {
+//        case .trending:
+//            "trending/tv/day"
+//        case .topRated:
+//            "tv/top_rated"
+//        case .popular:
+//            "tv/popular"
+//        }
+//    }
+//}
 
 class TVViewController: BaseViewController {
     
@@ -44,18 +44,27 @@ class TVViewController: BaseViewController {
     
     let tmdbManager = TMDBAPIManager.shared
     
-    var list: [[TVResult]] = Array(repeating: [], count: TVType.allCases.count)
+    let apiList: [TMDBAPI] = [.trending, .topRated, .popular]
+    
+    lazy var list: [[TVResult]] = Array(repeating: [], count: apiList.count)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TVType.allCases.enumerated().forEach { i, type in
-            tmdbManager.fetchTV(url: type.url) { result in
+        let group = DispatchGroup()
+        
+        apiList.enumerated().forEach { i, type in
+            group.enter()
+            tmdbManager.fetchTV(api: apiList[i]) { result in
                 self.list[i] = result
-                self.tableView.reloadData()
+                print(i)
+                group.leave()
             }
         }
 
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
     
     override func configureHierarchy() {
@@ -90,19 +99,21 @@ extension TVViewController: TableViewProtocol {
 extension TVViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TVType.allCases.count
+        return apiList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        TVTableViewCell.type = apiList[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: TVTableViewCell.identifier, for: indexPath) as! TVTableViewCell
         
+        cell.titleLabel.text = apiList[indexPath.row].title
         cell.collectionView.tag = indexPath.row
+        
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         cell.collectionView.register(TVCollectionViewCell.self, forCellWithReuseIdentifier: TVCollectionViewCell.identifier)
         cell.collectionView.reloadData()
-        
-        cell.titleLabel.text = TVType.allCases[indexPath.row].title
         
         return cell
     }
@@ -121,7 +132,7 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let item = list[collectionView.tag][indexPath.item]
         
         if let poster = item.poster {
-            let url = URL(string: "\(tmdbManager.imageBaseURL)\(poster)")
+            let url = URL(string: "\(TMDBAPI.imageBaseURL)\(poster)")
             cell.posterImageView.kf.setImage(with: url)
         } else {
             cell.posterImageView.image = UIImage(systemName: "xmark")
@@ -129,8 +140,7 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
         
         cell.titleLabel.text = item.name
         
-        let count = item.voteCount > 999 ? "999+" : "\(item.voteCount)"
-        cell.voteAverageLabel.text = String(format: "%.1f", item.voteAverage) + "( \(count))"
+        cell.voteAverageLabel.text = item.voteCountString
         
         return cell
     }

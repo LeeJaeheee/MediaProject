@@ -9,22 +9,22 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-enum TVDetailTableViewSections: Int, CaseIterable {
-    case Overview
-    case Cast
-    case Recommendation
-    
-    var title: String {
-        switch self {
-        case .Overview:
-            return "줄거리"
-        case .Cast:
-            return "출연"
-        case .Recommendation:
-            return "추천 콘텐츠"
-        }
-    }
-}
+//enum TVDetailTableViewSections: Int, CaseIterable {
+//    case Overview
+//    case Cast
+//    case Recommendation
+//    
+//    var title: String {
+//        switch self {
+//        case .Overview:
+//            return "줄거리"
+//        case .Cast:
+//            return "출연"
+//        case .Recommendation:
+//            return "추천 콘텐츠"
+//        }
+//    }
+//}
 
 class TVDetailViewController: BaseViewController {
     
@@ -34,6 +34,9 @@ class TVDetailViewController: BaseViewController {
     let tableView = UITableView()
     
     let tmdbManager = TMDBAPIManager.shared
+    
+    lazy var apiList: [TMDBAPI] = [.Overview(id: id), .Cast(id: id), .Recommendation(id: id)]
+    
     var tvDetail: TVDetailModel?
     var castList: [Cast] = []
     var recommendList: [TVResult] = []
@@ -46,19 +49,19 @@ class TVDetailViewController: BaseViewController {
         let group = DispatchGroup()
         
         group.enter()
-        tmdbManager.fetchTVDetail(id: id) { result in
+        tmdbManager.fetchTVDetail(api: .Overview(id: id)) { result in
             self.tvDetail = result
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchCredits(id: id) { result in
+        tmdbManager.fetchCredits(api: .Cast(id: id)) { result in
             self.castList = result
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchTV(url: "tv/\(id)/recommendations") { result in
+        tmdbManager.fetchTV(api: .Recommendation(id: id)) { result in
             self.recommendList = result
             group.leave()
         }
@@ -105,7 +108,7 @@ class TVDetailViewController: BaseViewController {
         guard let tvDetail = tvDetail else { return }
         
         if let backdrop = tvDetail.backdropPath {
-            backdropImageView.kf.setImage(with: URL(string: tmdbManager.imageBaseURL + backdrop))
+            backdropImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + backdrop))
         } else {
             backdropImageView.image = UIImage(systemName: "xmark")
         }
@@ -115,7 +118,7 @@ class TVDetailViewController: BaseViewController {
         titleLabel.font = .boldSystemFont(ofSize: 22)
         
         if let poster = tvDetail.posterPath {
-            posterImageView.kf.setImage(with: URL(string: tmdbManager.imageBaseURL + poster))
+            posterImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + poster))
         } else {
             posterImageView.image = UIImage(systemName: "xmark")
         }
@@ -132,38 +135,41 @@ class TVDetailViewController: BaseViewController {
 extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return TVDetailTableViewSections.allCases.count
+        return apiList.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return TVDetailTableViewSections.allCases[section].title
+        return apiList[section].title
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch TVDetailTableViewSections.allCases[section] {
+        switch apiList[section] {
         case .Overview:
             return 1
         case .Cast:
             return 4
         case .Recommendation:
-            return 1
+            // TODO: 섹션을 헤더까지 한방에 없애버리고싶다......
+            return recommendList.isEmpty ? 0 : 1
+        default:
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        switch TVDetailTableViewSections.allCases[indexPath.section] {
+        switch apiList[indexPath.section] {
             
         case .Overview:
             let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.identifier, for: indexPath) as! OverviewTableViewCell
-            cell.overviewLabel.text = tvDetail?.overview
+            cell.overviewLabel.text = tvDetail?.convertedOverview
             return cell
             
         case .Cast:
             let cell = tableView.dequeueReusableCell(withIdentifier: CastTableViewCell.identifier, for: indexPath) as! CastTableViewCell
             let cast = castList[indexPath.row]
             if let profile = cast.profilePath {
-                cell.profileImage.kf.setImage(with: URL(string: tmdbManager.imageBaseURL + profile))
+                cell.profileImage.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + profile))
             } else {
                 cell.profileImage.image = UIImage(systemName: "person")
             }
@@ -180,6 +186,8 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.collectionView.reloadData()
             
             return cell
+        default:
+            return UITableViewCell()
         }
     }
     
@@ -196,7 +204,7 @@ extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewData
 
         cell.backgroundColor = .black
         if let poster = recommendList[indexPath.item].poster {
-            cell.posterImageView.kf.setImage(with: URL(string: tmdbManager.imageBaseURL + poster))
+            cell.posterImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + poster))
         } else {
             cell.posterImageView.image = UIImage(systemName: "xmark")
         }

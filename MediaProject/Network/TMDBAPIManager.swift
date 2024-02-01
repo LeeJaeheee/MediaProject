@@ -12,16 +12,13 @@ class TMDBAPIManager {
     
     static let shared = TMDBAPIManager()
     
-    let imageBaseURL = "https://image.tmdb.org/t/p/w500"
+//    let baseURL = "https://api.themoviedb.org/3/"
+//    let parameter: Parameters = ["language": "ko-KR"]
+//    let header: HTTPHeaders = ["Authorization": APIKey.tmdb]
     
-    let baseURL = "https://api.themoviedb.org/3/"
-    let parameter: Parameters = ["language": "ko-KR"]
-    let header: HTTPHeaders = ["Authorization": APIKey.tmdb]
-    
-    func fetchTV(url: String, completionHandler: @escaping ([TVResult]) -> Void) {
-        let url = baseURL + url
-        
-        AF.request(url, parameters: parameter, headers: header).responseDecodable(of: TVModel.self) { response in
+    func fetchTV(api: TMDBAPI, completionHandler: @escaping ([TVResult]) -> Void) {
+
+        AF.request(api.endpoint, parameters: api.parameter, headers: api.header).responseDecodable(of: TVModel.self) { response in
             switch response.result {
             case .success(let success):
                 completionHandler(success.results)
@@ -32,10 +29,8 @@ class TMDBAPIManager {
 
     }
     
-    func fetchTVDetail(id: Int, completionHandler: @escaping (TVDetailModel) -> Void) {
-        let url = baseURL + "tv/\(id)"
-        
-        AF.request(url, parameters: parameter, headers: header).responseDecodable(of: TVDetailModel.self) { response in
+    func fetchTVDetail(api: TMDBAPI, completionHandler: @escaping (TVDetailModel) -> Void) {
+        AF.request(api.endpoint, parameters: api.parameter, headers: api.header).responseDecodable(of: TVDetailModel.self) { response in
             switch response.result {
             case .success(let success):
                 completionHandler(success)
@@ -45,10 +40,8 @@ class TMDBAPIManager {
         }
     }
     
-    func fetchCredits(id: Int, completionHandler: @escaping ([Cast]) -> Void) {
-        let url = baseURL + "tv/\(id)/aggregate_credits"
-        
-        AF.request(url, parameters: parameter, headers: header).responseDecodable(of: Credits.self) { response in
+    func fetchCredits(api: TMDBAPI, completionHandler: @escaping ([Cast]) -> Void) {
+        AF.request(api.endpoint, parameters: api.parameter, headers: api.header).responseDecodable(of: Credits.self) { response in
             switch response.result {
             case .success(let success):
                 completionHandler(success.cast)

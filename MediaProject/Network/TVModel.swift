@@ -22,6 +22,8 @@ struct TVResult: Decodable {
     let voteAverage: Double
     let voteCount: Int
     
+    let voteCountString: String
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -30,6 +32,18 @@ struct TVResult: Decodable {
         case poster = "poster_path"
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.overview = try container.decode(String.self, forKey: .overview)
+        self.backdrop = try container.decodeIfPresent(String.self, forKey: .backdrop)
+        self.poster = try container.decodeIfPresent(String.self, forKey: .poster)
+        self.voteAverage = try container.decode(Double.self, forKey: .voteAverage)
+        self.voteCount = try container.decode(Int.self, forKey: .voteCount)
+        self.voteCountString = String(format: "%.1f", voteAverage) + " (\(voteCount > 999 ? "999+" : "\(voteCount)"))"
     }
 }
 
@@ -45,6 +59,8 @@ struct TVDetailModel: Decodable {
     let seasons: [Season]
     let voteAverage: Double
     let voteCount: Int
+    
+    let convertedOverview: String
 
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
@@ -53,6 +69,20 @@ struct TVDetailModel: Decodable {
         case seasons
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
+        self.genres = try container.decode([Genre].self, forKey: .genres)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.overview = try container.decode(String.self, forKey: .overview)
+        self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
+        self.seasons = try container.decode([Season].self, forKey: .seasons)
+        self.voteAverage = try container.decode(Double.self, forKey: .voteAverage)
+        self.voteCount = try container.decode(Int.self, forKey: .voteCount)
+        self.convertedOverview = overview.isEmpty ? "줄거리를 제공하지 않습니다." : overview
     }
 }
 
