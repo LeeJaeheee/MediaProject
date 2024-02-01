@@ -10,46 +10,30 @@ import SnapKit
 import Kingfisher
 
 //enum TVType: Int, CaseIterable {
-//    
 //    case trending
 //    case topRated
 //    case popular
-//    
-//    var title: String {
-//        switch self {
-//        case .trending:
-//            return "추천 TV 콘텐츠"
-//        case .topRated:
-//            return "TOP 20 TV 콘텐츠"
-//        case .popular:
-//            return "인기 TV 콘텐츠"
-//        }
-//    }
-//    
-//    var url: String {
-//        switch self {
-//        case .trending:
-//            "trending/tv/day"
-//        case .topRated:
-//            "tv/top_rated"
-//        case .popular:
-//            "tv/popular"
-//        }
-//    }
 //}
 
 class TVViewController: BaseViewController {
     
-    let tableView = UITableView()
+    let mainView = TVView()
     
     let tmdbManager = TMDBAPIManager.shared
     
     let apiList: [TMDBAPI] = [.trending, .topRated, .popular]
     
     lazy var list: [[TVResult]] = Array(repeating: [], count: apiList.count)
+    
+    override func loadView() {
+        self.view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
         
         let group = DispatchGroup()
         
@@ -57,43 +41,14 @@ class TVViewController: BaseViewController {
             group.enter()
             tmdbManager.fetchTV(api: apiList[i]) { result in
                 self.list[i] = result
-                print(i)
                 group.leave()
             }
         }
 
         group.notify(queue: .main) {
-            self.tableView.reloadData()
+            self.mainView.tableView.reloadData()
         }
     }
-    
-    override func configureHierarchy() {
-        view.addSubview(tableView)
-    }
-    
-    override func configureLayout() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    override func configureView() {
-        view.backgroundColor = .systemBackground
-        configureTableView()
-    }
-    
-}
-
-extension TVViewController: TableViewProtocol {
-    
-    func configureTableView() {
-        tableView.separatorStyle = .none
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
-    }
-
 }
 
 extension TVViewController: UITableViewDelegate, UITableViewDataSource {

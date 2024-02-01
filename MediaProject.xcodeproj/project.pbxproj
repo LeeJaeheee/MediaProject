@@ -35,6 +35,8 @@
 		D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */; };
 		D2F1B86E2B6B9479002DCFD5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B86D2B6B9479002DCFD5 /* BaseView.swift */; };
 		D2F1B8702B6BA573002DCFD5 /* TMDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */; };
+		D2F1B8722B6BCFA1002DCFD5 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8712B6BCFA1002DCFD5 /* TVView.swift */; };
+		D2F1B8742B6BD393002DCFD5 /* TVDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8732B6BD392002DCFD5 /* TVDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2F1B86D2B6B9479002DCFD5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPI.swift; sourceTree = "<group>"; };
+		D2F1B8712B6BCFA1002DCFD5 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
+		D2F1B8732B6BD392002DCFD5 /* TVDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +105,7 @@
 		D2F1B8152B68E1D0002DCFD5 /* MediaProject */ = {
 			isa = PBXGroup;
 			children = (
-				D2F1B8482B68FD0B002DCFD5 /* CustomView */,
+				D2F1B8482B68FD0B002DCFD5 /* View */,
 				D2F1B83B2B68E3CC002DCFD5 /* Resource */,
 				D2F1B8382B68E336002DCFD5 /* TV */,
 				D2F1B8372B68E30E002DCFD5 /* Network */,
@@ -134,6 +138,8 @@
 				D2F1B8462B68F90D002DCFD5 /* TVTableViewCell.swift */,
 				D2F1B8492B690175002DCFD5 /* TVCollectionViewCell.swift */,
 				D2F1B85B2B6AC1D8002DCFD5 /* TVDetailViewController.swift */,
+				D2F1B8712B6BCFA1002DCFD5 /* TVView.swift */,
+				D2F1B8732B6BD392002DCFD5 /* TVDetailView.swift */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -143,21 +149,21 @@
 			children = (
 				D2F1B83C2B68E3EB002DCFD5 /* ReusableProtocol.swift */,
 				D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */,
+				D2F1B86D2B6B9479002DCFD5 /* BaseView.swift */,
 				D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		D2F1B8482B68FD0B002DCFD5 /* CustomView */ = {
+		D2F1B8482B68FD0B002DCFD5 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				D2F1B85D2B6AE580002DCFD5 /* OverviewTableViewCell.swift */,
 				D2F1B85F2B6AE768002DCFD5 /* CastTableViewCell.swift */,
 				D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */,
 				D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */,
-				D2F1B86D2B6B9479002DCFD5 /* BaseView.swift */,
 			);
-			path = CustomView;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,7 +255,9 @@
 				D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */,
 				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
 				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
+				D2F1B8722B6BCFA1002DCFD5 /* TVView.swift in Sources */,
 				D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */,
+				D2F1B8742B6BD393002DCFD5 /* TVDetailView.swift in Sources */,
 				D2F1B85E2B6AE580002DCFD5 /* OverviewTableViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
 				D2F1B8702B6BA573002DCFD5 /* TMDBAPI.swift in Sources */,

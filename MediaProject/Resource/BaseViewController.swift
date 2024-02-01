@@ -11,7 +11,6 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         navigationController?.navigationItem.backButtonTitle = ""
 
         configureHierarchy()

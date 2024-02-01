@@ -13,26 +13,12 @@ import Kingfisher
 //    case Overview
 //    case Cast
 //    case Recommendation
-//    
-//    var title: String {
-//        switch self {
-//        case .Overview:
-//            return "줄거리"
-//        case .Cast:
-//            return "출연"
-//        case .Recommendation:
-//            return "추천 콘텐츠"
-//        }
-//    }
 //}
 
 class TVDetailViewController: BaseViewController {
     
-    let backdropImageView = UIImageView()
-    let titleLabel = UILabel()
-    let posterImageView = UIImageView()
-    let tableView = UITableView()
-    
+    let mainView = TVDetailView()
+ 
     let tmdbManager = TMDBAPIManager.shared
     
     lazy var apiList: [TMDBAPI] = [.Overview(id: id), .Cast(id: id), .Recommendation(id: id)]
@@ -42,6 +28,10 @@ class TVDetailViewController: BaseViewController {
     var recommendList: [TVResult] = []
     
     var id: Int = 0
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,39 +58,7 @@ class TVDetailViewController: BaseViewController {
         
         group.notify(queue: .main) {
             self.configureView()
-            self.tableView.reloadData()
-        }
-    }
-    
-    override func configureHierarchy() {
-        view.addSubview(backdropImageView)
-        view.addSubview(titleLabel)
-        view.addSubview(posterImageView)
-        view.addSubview(tableView)
-    }
-    
-    override func configureLayout() {
-        backdropImageView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(backdropImageView.snp.width).multipliedBy(0.5)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(backdropImageView).inset(16)
-            make.horizontalEdges.equalToSuperview().inset(28)
-            make.height.equalTo(28)
-        }
-        
-        posterImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalTo(titleLabel)
-            make.bottom.equalTo(backdropImageView).inset(8)
-            make.width.equalTo(posterImageView.snp.height).multipliedBy(2.0/3.0)
-        }
-        
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(backdropImageView.snp.bottom)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            self.mainView.tableView.reloadData()
         }
     }
     
@@ -108,27 +66,25 @@ class TVDetailViewController: BaseViewController {
         guard let tvDetail = tvDetail else { return }
         
         if let backdrop = tvDetail.backdropPath {
-            backdropImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + backdrop))
+            mainView.backdropImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + backdrop))
         } else {
-            backdropImageView.image = UIImage(systemName: "xmark")
+            mainView.backdropImageView.image = UIImage(systemName: "xmark")
         }
         
-        titleLabel.text = tvDetail.name
-        titleLabel.textColor = .white
-        titleLabel.font = .boldSystemFont(ofSize: 22)
+        mainView.titleLabel.text = tvDetail.name
+
         
         if let poster = tvDetail.posterPath {
-            posterImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + poster))
+            mainView.posterImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + poster))
         } else {
-            posterImageView.image = UIImage(systemName: "xmark")
+            mainView.posterImageView.image = UIImage(systemName: "xmark")
         }
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(OverviewTableViewCell.self, forCellReuseIdentifier: OverviewTableViewCell.identifier)
-        tableView.register(CastTableViewCell.self, forCellReuseIdentifier: CastTableViewCell.identifier)
-        tableView.register(RecommendationTableViewCell.self, forCellReuseIdentifier: RecommendationTableViewCell.identifier)
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        
     }
+    
 
 }
 
