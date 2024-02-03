@@ -39,20 +39,23 @@ class TVDetailViewController: BaseViewController {
         let group = DispatchGroup()
         
         group.enter()
-        tmdbManager.fetchTVDetail(api: .Overview(id: id)) { result in
+        tmdbManager.request(type: TVDetailModel.self, api: apiList[0]) { result in
             self.tvDetail = result
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchCredits(api: .Cast(id: id)) { result in
-            self.castList = result
+        tmdbManager.request(type: CreditModel.self, api: apiList[1]) { result in
+            self.castList = result.cast
             group.leave()
         }
         
         group.enter()
-        tmdbManager.fetchTV(api: .Recommendation(id: id)) { result in
-            self.recommendList = result
+        tmdbManager.request(type: TVModel.self, api: apiList[2]) { result in
+            self.recommendList = result.results
+//            if self.recommendList.isEmpty {
+//                self.apiList.remove(at: 2)
+//            }
             group.leave()
         }
         
@@ -103,10 +106,9 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
         case .Overview:
             return 1
         case .Cast:
-            return 4
+            return min(4, castList.count)
         case .Recommendation:
-            // TODO: 섹션을 헤더까지 한방에 없애버리고싶다......
-            return recommendList.isEmpty ? 0 : 1
+            return 1
         default:
             return 0
         }

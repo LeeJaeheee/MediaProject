@@ -111,7 +111,7 @@ struct Season: Decodable {
 
 // MARK: - Credits
 
-struct Credits: Decodable {
+struct CreditModel: Decodable {
     let cast: [Cast]
     let id: Int
 }

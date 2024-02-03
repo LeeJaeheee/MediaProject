@@ -39,8 +39,8 @@ class TVViewController: BaseViewController {
         
         apiList.enumerated().forEach { i, type in
             group.enter()
-            tmdbManager.fetchTV(api: apiList[i]) { result in
-                self.list[i] = result
+            tmdbManager.request(type: TVModel.self, api: apiList[i]) { result in
+                self.list[i] = result.results
                 group.leave()
             }
         }

@@ -57,4 +57,21 @@ enum TMDBAPI: Equatable {
             return "추천 콘텐츠"
         }
     }
+    
+    var responseType: Decodable.Type {
+        switch self {
+        case .trending:
+            return TVModel.self
+        case .topRated:
+            return TVModel.self
+        case .popular:
+            return TVModel.self
+        case .Overview:
+            return TVDetailModel.self
+        case .Cast:
+            return CreditModel.self
+        case .Recommendation:
+            return TVModel.self
+        }
+    }
 }
