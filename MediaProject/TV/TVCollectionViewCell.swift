@@ -46,7 +46,7 @@ extension TVCollectionViewCell: ConfigureProtocol {
     }
     
     func configureLayout() {
-
+        
         posterImageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
         }
@@ -82,5 +82,6 @@ extension TVCollectionViewCell: ConfigureProtocol {
         
         voteAverageLabel.font = .systemFont(ofSize: 12)
     }
+    
     
 }

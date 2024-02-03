@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 
-// TODO: Equatable 나중에 테이블뷰셀마다 높이 다르게 하는거 성공하고 나면 지우기..
 enum TMDBAPI: Equatable {
     
     case trending

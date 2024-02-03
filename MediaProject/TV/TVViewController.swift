@@ -53,13 +53,16 @@ class TVViewController: BaseViewController {
 
 extension TVViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return apiList[indexPath.row] == .topRated ? 344 : 244
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return apiList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        TVTableViewCell.type = apiList[indexPath.row]
-        
+ 
         let cell = tableView.dequeueReusableCell(withIdentifier: TVTableViewCell.identifier, for: indexPath) as! TVTableViewCell
         
         cell.titleLabel.text = apiList[indexPath.row].title
@@ -104,6 +107,19 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let vc = TVDetailViewController()
         vc.id = list[collectionView.tag][indexPath.item].id
         present(vc, animated: true)
+    }
+    
+}
+
+extension TVViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if apiList[collectionView.tag] == .topRated {
+            return CGSize(width: 150, height: 300)
+        } else {
+            return CGSize(width: 100, height: 200)
+        }
     }
     
 }
