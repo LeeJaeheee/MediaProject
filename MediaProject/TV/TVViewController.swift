@@ -106,7 +106,9 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TVDetailViewController()
         vc.id = list[collectionView.tag][indexPath.item].id
-        present(vc, animated: true)
+        vc.isPresented = true
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
     
 }
@@ -115,11 +117,7 @@ extension TVViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if apiList[collectionView.tag] == .topRated {
-            return CGSize(width: 150, height: 300)
-        } else {
-            return CGSize(width: 100, height: 200)
-        }
+        return apiList[collectionView.tag] == .topRated ? CGSize(width: 150, height: 300) : CGSize(width: 100, height: 200)
     }
     
 }

@@ -27,6 +27,7 @@ class TVDetailViewController: BaseViewController {
     var castList: [Cast] = []
     var recommendList: [TVResult] = []
     
+    var isPresented: Bool = false
     var id: Int = 0
     
     override func loadView() {
@@ -63,6 +64,13 @@ class TVDetailViewController: BaseViewController {
             self.configureView()
             self.mainView.tableView.reloadData()
         }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = isPresented
     }
     
     override func configureView() {
@@ -170,6 +178,14 @@ extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = TVDetailViewController()
+        vc.id = recommendList[indexPath.item].id
+        vc.isPresented = false
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
+
 
 
