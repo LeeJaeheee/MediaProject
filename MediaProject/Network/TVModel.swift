@@ -84,6 +84,19 @@ struct TVDetailModel: Decodable {
         self.voteCount = try container.decode(Int.self, forKey: .voteCount)
         self.convertedOverview = overview.isEmpty ? "줄거리를 제공하지 않습니다." : overview
     }
+    
+    init() {
+        self.backdropPath = nil
+        self.genres = []
+        self.id = 0
+        self.name = ""
+        self.overview = ""
+        self.posterPath = nil
+        self.seasons = []
+        self.voteAverage = 0.0
+        self.voteCount = 0
+        self.convertedOverview = ""
+    }
 }
 
 struct Genre: Decodable {

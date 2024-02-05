@@ -23,8 +23,7 @@ class OverviewTableViewCell: UITableViewCell {
         contentView.addSubview(overviewLabel)
         
         overviewLabel.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview().inset(8)
-            make.horizontalEdges.equalToSuperview().inset(16)
+            make.edges.equalToSuperview().inset(16)
         }
     }
     

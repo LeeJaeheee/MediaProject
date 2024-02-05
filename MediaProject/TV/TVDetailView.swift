@@ -51,6 +51,7 @@ class TVDetailView: BaseView {
         titleLabel.textColor = .white
         titleLabel.font = .boldSystemFont(ofSize: 22)
         
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(OverviewTableViewCell.self, forCellReuseIdentifier: OverviewTableViewCell.identifier)
         tableView.register(CastTableViewCell.self, forCellReuseIdentifier: CastTableViewCell.identifier)
         tableView.register(RecommendationTableViewCell.self, forCellReuseIdentifier: RecommendationTableViewCell.identifier)

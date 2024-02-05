@@ -9,12 +9,6 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-//enum TVDetailTableViewSections: Int, CaseIterable {
-//    case Overview
-//    case Cast
-//    case Recommendation
-//}
-
 class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
@@ -23,7 +17,7 @@ class TVDetailViewController: BaseViewController {
     
     lazy var apiList: [TMDBAPI] = [.Overview(id: id), .Cast(id: id), .Recommendation(id: id)]
     
-    var tvDetail: TVDetailModel?
+    var tvDetail = TVDetailModel()
     var castList: [Cast] = []
     var recommendList: [TVResult] = []
     
@@ -42,6 +36,7 @@ class TVDetailViewController: BaseViewController {
         group.enter()
         tmdbManager.request(type: TVDetailModel.self, api: apiList[0]) { result in
             self.tvDetail = result
+            dump(result)
             group.leave()
         }
         
@@ -74,8 +69,6 @@ class TVDetailViewController: BaseViewController {
     }
     
     override func configureView() {
-        guard let tvDetail = tvDetail else { return }
-        
         if let backdrop = tvDetail.backdropPath {
             mainView.backdropImageView.kf.setImage(with: URL(string: TMDBAPI.imageBaseURL + backdrop))
         } else {
@@ -128,7 +121,7 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
         case .Overview:
             let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.identifier, for: indexPath) as! OverviewTableViewCell
-            cell.overviewLabel.text = tvDetail?.convertedOverview
+            cell.overviewLabel.text = tvDetail.convertedOverview
             return cell
             
         case .Cast:
