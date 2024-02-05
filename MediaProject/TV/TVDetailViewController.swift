@@ -13,7 +13,7 @@ class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
  
-    let tmdbManager = TMDBAPIManager.shared
+    let tmdbManager = TMDBSessionManager.shared
     
     lazy var apiList: [TMDBAPI] = [.Overview(id: id), .Cast(id: id), .Recommendation(id: id)]
     
@@ -34,24 +34,32 @@ class TVDetailViewController: BaseViewController {
         let group = DispatchGroup()
         
         group.enter()
-        tmdbManager.request(type: TVDetailModel.self, api: apiList[0]) { result in
-            self.tvDetail = result
-            dump(result)
+        tmdbManager.request(type: TVDetailModel.self, api: apiList[0]) { result, error  in
+            if let result {
+                self.tvDetail = result
+            } else {
+                self.handleTMDBError(error)
+            }
             group.leave()
         }
         
         group.enter()
-        tmdbManager.request(type: CreditModel.self, api: apiList[1]) { result in
-            self.castList = result.cast
+        tmdbManager.request(type: CreditModel.self, api: apiList[1]) { result, error  in
+            if let result {
+                self.castList = result.cast
+            } else {
+                self.handleTMDBError(error)
+            }
             group.leave()
         }
         
         group.enter()
-        tmdbManager.request(type: TVModel.self, api: apiList[2]) { result in
-            self.recommendList = result.results
-//            if self.recommendList.isEmpty {
-//                self.apiList.remove(at: 2)
-//            }
+        tmdbManager.request(type: TVModel.self, api: apiList[2]) { result, error  in
+            if let result {
+                self.recommendList = result.results
+            } else {
+                self.handleTMDBError(error)
+            }
             group.leave()
         }
         

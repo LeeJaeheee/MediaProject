@@ -23,20 +23,20 @@ enum TMDBAPI: Equatable {
     var method: HTTPMethod { .get }
     var parameter: Parameters { ["language": "ko-KR"] }
     
-    var endpoint: String {
+    var endpoint: URL {
         switch self {
         case .trending:
-            baseURL + "trending/tv/day"
+            URL(string: baseURL + "trending/tv/day")!
         case .topRated:
-            baseURL + "tv/top_rated"
+            URL(string: baseURL + "tv/top_rated")!
         case .popular:
-            baseURL + "tv/popular"
+            URL(string: baseURL + "tv/popular")!
         case .Overview(let id):
-            baseURL + "tv/\(id)"
+            URL(string: baseURL + "tv/\(id)")!
         case .Cast(let id):
-            baseURL + "tv/\(id)/aggregate_credits"
+            URL(string: baseURL + "tv/\(id)/aggregate_credits")!
         case .Recommendation(let id):
-            baseURL + "tv/\(id)/recommendations"
+            URL(string: baseURL + "tv/\(id)/recommendations")!
         }
     }
     

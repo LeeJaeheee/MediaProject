@@ -46,5 +46,25 @@ class BaseViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func handleTMDBError(_ error: SeSACError?) {
+        guard let error = error else { return }
+        switch error {
+        case .failedRequest:
+            showAlert(message: "Failed Request")
+        case .noData:
+            showAlert(message: "No Data")
+        case .invalidResponse:
+            showAlert(message: "Invalid Response")
+        case .invalidData:
+            showAlert(message: "Invalid Data")
+        }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 
 }

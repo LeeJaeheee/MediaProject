@@ -19,7 +19,7 @@ class TVViewController: BaseViewController {
     
     let mainView = TVView()
     
-    let tmdbManager = TMDBAPIManager.shared
+    let tmdbManager = TMDBSessionManager.shared
     
     let apiList: [TMDBAPI] = [.trending, .topRated, .popular]
     
@@ -39,8 +39,12 @@ class TVViewController: BaseViewController {
         
         apiList.enumerated().forEach { i, type in
             group.enter()
-            tmdbManager.request(type: TVModel.self, api: apiList[i]) { result in
-                self.list[i] = result.results
+            tmdbManager.request(type: TVModel.self, api: apiList[i]) { result, error  in
+                if let result {
+                    self.list[i] = result.results
+                } else {
+                    self.handleTMDBError(error)
+                }
                 group.leave()
             }
         }

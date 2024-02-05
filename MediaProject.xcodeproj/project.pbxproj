@@ -37,6 +37,7 @@
 		D2F1B8702B6BA573002DCFD5 /* TMDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */; };
 		D2F1B8722B6BCFA1002DCFD5 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8712B6BCFA1002DCFD5 /* TVView.swift */; };
 		D2F1B8742B6BD393002DCFD5 /* TVDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8732B6BD392002DCFD5 /* TVDetailView.swift */; };
+		D2F1B8802B70BA7C002DCFD5 /* TMDBSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B87F2B70BA7C002DCFD5 /* TMDBSessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPI.swift; sourceTree = "<group>"; };
 		D2F1B8712B6BCFA1002DCFD5 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
 		D2F1B8732B6BD392002DCFD5 /* TVDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailView.swift; sourceTree = "<group>"; };
+		D2F1B87F2B70BA7C002DCFD5 /* TMDBSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBSessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				D2F1B8422B68EAA5002DCFD5 /* APIKey.swift */,
 				D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */,
 				D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */,
+				D2F1B87F2B70BA7C002DCFD5 /* TMDBSessionManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				D2F1B85C2B6AC1D8002DCFD5 /* TVDetailViewController.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
 				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,
+				D2F1B8802B70BA7C002DCFD5 /* TMDBSessionManager.swift in Sources */,
 				D2F1B8602B6AE768002DCFD5 /* CastTableViewCell.swift in Sources */,
 				D2F1B8622B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift in Sources */,
 				D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */,
