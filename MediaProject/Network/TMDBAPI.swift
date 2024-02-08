@@ -8,8 +8,14 @@
 import Foundation
 import Alamofire
 
+enum MediaType: String {
+    case all
+    case movie
+    case tv
+}
+
 enum TMDBAPI: Equatable {
-    
+    //TODO: 연관값 추가해서 미디어타입 정해주기
     case trending
     case topRated
     case popular
@@ -27,19 +33,19 @@ enum TMDBAPI: Equatable {
     var endpoint: URL {
         switch self {
         case .trending:
-            URL(string: baseURL + "trending/tv/day")!
+            URL(string: baseURL + "trending/movie/day")!
         case .topRated:
-            URL(string: baseURL + "tv/top_rated")!
+            URL(string: baseURL + "movie/top_rated")!
         case .popular:
-            URL(string: baseURL + "tv/popular")!
+            URL(string: baseURL + "movie/popular")!
         case .Overview(let id):
-            URL(string: baseURL + "tv/\(id)")!
+            URL(string: baseURL + "movie/\(id)")!
         case .Cast(let id):
-            URL(string: baseURL + "tv/\(id)/aggregate_credits")!
+            URL(string: baseURL + "movie/\(id)/credits")! //tv: aggregated_credits
         case .Recommendation(let id):
-            URL(string: baseURL + "tv/\(id)/recommendations")!
+            URL(string: baseURL + "movie/\(id)/recommendations")!
         case .video(id: let id):
-            URL(string: baseURL + "tv/\(id)/videos")!
+            URL(string: baseURL + "movie/\(id)/videos")!
         }
     }
     

@@ -16,6 +16,7 @@ struct TVModel: Decodable {
 struct TVResult: Decodable {
     let id: Int
     let name: String
+    let title: String
     let overview: String
     let backdrop: String?
     let poster: String?
@@ -27,6 +28,7 @@ struct TVResult: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name
+        case title
         case overview
         case backdrop = "backdrop_path"
         case poster = "poster_path"
@@ -37,7 +39,8 @@ struct TVResult: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? container.decode(String.self, forKey: .title)
+        self.title = self.name
         self.overview = try container.decode(String.self, forKey: .overview)
         self.backdrop = try container.decodeIfPresent(String.self, forKey: .backdrop)
         self.poster = try container.decodeIfPresent(String.self, forKey: .poster)
@@ -54,9 +57,10 @@ struct TVDetailModel: Decodable {
     let genres: [Genre]
     let id: Int
     let name: String
+    let title: String
     let overview: String
     let posterPath: String?
-    let seasons: [Season]
+    let seasons: [Season]?
     let voteAverage: Double
     let voteCount: Int
     
@@ -64,7 +68,7 @@ struct TVDetailModel: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
-        case genres, id, name, overview
+        case genres, id, name, title, overview
         case posterPath = "poster_path"
         case seasons
         case voteAverage = "vote_average"
@@ -76,10 +80,11 @@ struct TVDetailModel: Decodable {
         self.backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
         self.genres = try container.decode([Genre].self, forKey: .genres)
         self.id = try container.decode(Int.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? container.decode(String.self, forKey: .title)
+        self.title = self.name
         self.overview = try container.decode(String.self, forKey: .overview)
         self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
-        self.seasons = try container.decode([Season].self, forKey: .seasons)
+        self.seasons = try container.decodeIfPresent([Season].self, forKey: .seasons)
         self.voteAverage = try container.decode(Double.self, forKey: .voteAverage)
         self.voteCount = try container.decode(Int.self, forKey: .voteCount)
         self.convertedOverview = overview.isEmpty ? "줄거리를 제공하지 않습니다." : overview
@@ -90,6 +95,7 @@ struct TVDetailModel: Decodable {
         self.genres = []
         self.id = 0
         self.name = ""
+        self.title = ""
         self.overview = ""
         self.posterPath = nil
         self.seasons = []
@@ -130,17 +136,30 @@ struct CreditModel: Decodable {
 }
 
 struct Cast: Decodable {
-    let gender, id: Int
+    let id: Int
     let name, originalName: String
     let profilePath: String?
     let roles: [Role]
+    let character: String
 
     enum CodingKeys: String, CodingKey {
-        case gender, id, name
+        case id, name
         case originalName = "original_name"
         case profilePath = "profile_path"
         case roles
+        case character
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.originalName = try container.decode(String.self, forKey: .originalName)
+        self.profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
+        self.roles = try container.decodeIfPresent([Role].self, forKey: .roles) ?? []
+        self.character = try container.decodeIfPresent(String.self, forKey: .character) ?? self.roles.first?.character ?? ""
+    }
+
 }
 
 struct Role: Decodable {

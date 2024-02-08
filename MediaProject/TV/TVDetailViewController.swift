@@ -152,7 +152,7 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.profileImage.image = UIImage(systemName: "person")
             }
             cell.nameLabel.text = cast.name
-            cell.roleLabel.text = cast.roles[0].character
+            cell.roleLabel.text = cast.character
             return cell
             
         case .Recommendation:
