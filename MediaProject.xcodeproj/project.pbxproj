@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D252D29B2B74B19D0063D02E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D29A2B74B19D0063D02E /* MainTabBarController.swift */; };
+		D252D29E2B74B2240063D02E /* NewAndHotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D29D2B74B2240063D02E /* NewAndHotViewController.swift */; };
+		D252D2A02B74B2960063D02E /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */; };
+		D252D2A22B74B2BB0063D02E /* NewAndHotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */; };
+		D252D2A52B74B2FA0063D02E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */; };
 		D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8162B68E1D0002DCFD5 /* AppDelegate.swift */; };
 		D2F1B8192B68E1D0002DCFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8182B68E1D0002DCFD5 /* SceneDelegate.swift */; };
 		D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B81A2B68E1D0002DCFD5 /* ViewController.swift */; };
@@ -41,6 +46,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D252D29A2B74B19D0063D02E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D252D29D2B74B2240063D02E /* NewAndHotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndHotViewController.swift; sourceTree = "<group>"; };
+		D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndHotTableViewCell.swift; sourceTree = "<group>"; };
+		D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D2F1B8132B68E1D0002DCFD5 /* MediaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F1B8162B68E1D0002DCFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2F1B8182B68E1D0002DCFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +97,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D252D29C2B74B2030063D02E /* NewAndHot */ = {
+			isa = PBXGroup;
+			children = (
+				D252D29D2B74B2240063D02E /* NewAndHotViewController.swift */,
+			);
+			path = NewAndHot;
+			sourceTree = "<group>";
+		};
+		D252D2A32B74B2E70063D02E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		D2F1B80A2B68E1D0002DCFD5 = {
 			isa = PBXGroup;
 			children = (
@@ -107,9 +133,11 @@
 		D2F1B8152B68E1D0002DCFD5 /* MediaProject */ = {
 			isa = PBXGroup;
 			children = (
+				D252D2A32B74B2E70063D02E /* Profile */,
 				D2F1B8482B68FD0B002DCFD5 /* View */,
 				D2F1B83B2B68E3CC002DCFD5 /* Resource */,
 				D2F1B8382B68E336002DCFD5 /* TV */,
+				D252D29C2B74B2030063D02E /* NewAndHot */,
 				D2F1B8372B68E30E002DCFD5 /* Network */,
 				D2F1B8162B68E1D0002DCFD5 /* AppDelegate.swift */,
 				D2F1B8182B68E1D0002DCFD5 /* SceneDelegate.swift */,
@@ -154,6 +182,7 @@
 				D2F1B83E2B68E3FE002DCFD5 /* ConfigureProtocol.swift */,
 				D2F1B86D2B6B9479002DCFD5 /* BaseView.swift */,
 				D2F1B8582B6A1899002DCFD5 /* BaseViewController.swift */,
+				D252D29A2B74B19D0063D02E /* MainTabBarController.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -165,6 +194,8 @@
 				D2F1B85F2B6AE768002DCFD5 /* CastTableViewCell.swift */,
 				D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */,
 				D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */,
+				D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */,
+				D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,10 +287,14 @@
 			files = (
 				D2F1B83F2B68E3FE002DCFD5 /* ConfigureProtocol.swift in Sources */,
 				D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */,
+				D252D2A02B74B2960063D02E /* TagCollectionViewCell.swift in Sources */,
 				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
 				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
 				D2F1B8722B6BCFA1002DCFD5 /* TVView.swift in Sources */,
+				D252D2A52B74B2FA0063D02E /* ProfileViewController.swift in Sources */,
+				D252D2A22B74B2BB0063D02E /* NewAndHotTableViewCell.swift in Sources */,
 				D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */,
+				D252D29B2B74B19D0063D02E /* MainTabBarController.swift in Sources */,
 				D2F1B8742B6BD393002DCFD5 /* TVDetailView.swift in Sources */,
 				D2F1B85E2B6AE580002DCFD5 /* OverviewTableViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
@@ -268,6 +303,7 @@
 				D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */,
 				D2F1B85C2B6AC1D8002DCFD5 /* TVDetailViewController.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
+				D252D29E2B74B2240063D02E /* NewAndHotViewController.swift in Sources */,
 				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,
 				D2F1B8802B70BA7C002DCFD5 /* TMDBSessionManager.swift in Sources */,
 				D2F1B8602B6AE768002DCFD5 /* CastTableViewCell.swift in Sources */,
