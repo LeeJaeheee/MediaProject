@@ -54,6 +54,21 @@ class TVDetailViewController: BaseViewController {
         }
         
         group.enter()
+        tmdbManager.request(type: VideoModel.self, api: .video(id: id)) { result, error  in
+            if let result {
+                if !result.results.isEmpty {
+                    if let url = URL(string: "https://www.youtube.com/embed/\(result.results[0].key)") {
+                        self.mainView.videoView.load(URLRequest(url: url))
+                        self.mainView.videoView.isHidden = false
+                    }
+                }
+            } else {
+                self.handleTMDBError(error)
+            }
+            group.leave()
+        }
+        
+        group.enter()
         tmdbManager.request(type: TVModel.self, api: apiList[2]) { result, error  in
             if let result {
                 self.recommendList = result.results

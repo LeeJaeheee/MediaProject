@@ -30,7 +30,7 @@ class RecommendationTableViewCell: UITableViewCell {
     func configureLayout() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(150).priority(.high)
+            make.height.equalTo(150)
         }
     }
     

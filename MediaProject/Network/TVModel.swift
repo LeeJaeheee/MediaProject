@@ -146,3 +146,14 @@ struct Cast: Decodable {
 struct Role: Decodable {
     let character: String
 }
+
+// MARK: - Videos
+
+struct VideoModel: Decodable {
+    let id: Int
+    let results: [VideoResult]
+}
+
+struct VideoResult: Decodable {
+    let key: String
+}

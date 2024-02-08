@@ -16,6 +16,7 @@ enum TMDBAPI: Equatable {
     case Overview(id: Int)
     case Cast(id: Int)
     case Recommendation(id: Int)
+    case video(id: Int)
     
     static var imageBaseURL: String { "https://image.tmdb.org/t/p/w500" }
     var baseURL: String { "https://api.themoviedb.org/3/" }
@@ -37,6 +38,8 @@ enum TMDBAPI: Equatable {
             URL(string: baseURL + "tv/\(id)/aggregate_credits")!
         case .Recommendation(let id):
             URL(string: baseURL + "tv/\(id)/recommendations")!
+        case .video(id: let id):
+            URL(string: baseURL + "tv/\(id)/videos")!
         }
     }
     
@@ -54,6 +57,8 @@ enum TMDBAPI: Equatable {
             return "출연"
         case .Recommendation:
             return "추천 콘텐츠"
+        default:
+            return ""
         }
     }
     
@@ -71,6 +76,8 @@ enum TMDBAPI: Equatable {
             return CreditModel.self
         case .Recommendation:
             return TVModel.self
+        case .video:
+            return VideoModel.self
         }
     }
 }

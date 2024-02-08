@@ -50,7 +50,7 @@ class CastTableViewCell: UITableViewCell {
         profileImage.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(4)
             make.leading.equalToSuperview().inset(20)
-            make.height.equalTo(70).priority(.high)
+            make.height.equalTo(70)
             make.width.equalTo(profileImage.snp.height).multipliedBy(0.75)
         }
         nameLabel.snp.makeConstraints { make in

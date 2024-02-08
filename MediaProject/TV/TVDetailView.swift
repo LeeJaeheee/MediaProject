@@ -6,18 +6,25 @@
 //
 
 import UIKit
+import WebKit
 
 class TVDetailView: BaseView {
     
     let backdropImageView = UIImageView()
     let titleLabel = UILabel()
     let posterImageView = UIImageView()
+    let videoView: WKWebView = {
+        let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        return WKWebView(frame: .zero, configuration: config)
+    }()
     let tableView = UITableView()
     
     override func configureHierarchy() {
         addSubview(backdropImageView)
         addSubview(titleLabel)
         addSubview(posterImageView)
+        addSubview(videoView)
         addSubview(tableView)
     }
     
@@ -40,6 +47,12 @@ class TVDetailView: BaseView {
             make.width.equalTo(posterImageView.snp.height).multipliedBy(2.0/3.0)
         }
         
+        videoView.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(posterImageView)
+            make.leading.equalTo(posterImageView.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().inset(28)
+        }
+        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(backdropImageView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
@@ -50,6 +63,9 @@ class TVDetailView: BaseView {
  
         titleLabel.textColor = .white
         titleLabel.font = .boldSystemFont(ofSize: 22)
+        
+        videoView.isHidden = true
+        videoView.backgroundColor = .black
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(OverviewTableViewCell.self, forCellReuseIdentifier: OverviewTableViewCell.identifier)
