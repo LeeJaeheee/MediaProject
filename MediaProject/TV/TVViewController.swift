@@ -9,19 +9,21 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-//enum TVType: Int, CaseIterable {
-//    case trending
-//    case topRated
-//    case popular
-//}
-
 class TVViewController: BaseViewController {
+    
+    var mediaType: MediaType = .all {
+        didSet {
+            mainView.tagCollectionView.reloadData()
+            apiList = [.trending(type: mediaType), .topRated(type: mediaType), .popular(type: mediaType)]
+            requestAPI()
+        }
+    }
     
     let mainView = TVView()
     
     let tmdbManager = TMDBSessionManager.shared
     
-    let apiList: [TMDBAPI] = [.trending, .topRated, .popular]
+    lazy var apiList: [TMDBAPI] = [.trending(type: mediaType), .topRated(type: mediaType), .popular(type: mediaType)]
     
     lazy var list: [[TVResult]] = Array(repeating: [], count: apiList.count)
     
@@ -35,6 +37,15 @@ class TVViewController: BaseViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         
+        mainView.tagCollectionView.delegate = self
+        mainView.tagCollectionView.dataSource = self
+        mainView.tagCollectionView.tag = list.count
+        mainView.tagCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        
+        requestAPI()
+    }
+    
+    func requestAPI() {
         let group = DispatchGroup()
         
         apiList.enumerated().forEach { i, type in
@@ -58,7 +69,7 @@ class TVViewController: BaseViewController {
 extension TVViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return apiList[indexPath.row] == .topRated ? 344 : 244
+        return apiList[indexPath.row] == .topRated(type: mediaType) ? 344 : 244
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -85,34 +96,67 @@ extension TVViewController: UITableViewDelegate, UITableViewDataSource {
 extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list[collectionView.tag].count
+        return collectionView.tag == list.count ? HomeTag.allCases.count : list[collectionView.tag].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCollectionViewCell.identifier, for: indexPath) as! TVCollectionViewCell
-        
-        let item = list[collectionView.tag][indexPath.item]
-        
-        if let poster = item.poster {
-            let url = URL(string: "\(TMDBAPI.imageBaseURL)\(poster)")
-            cell.posterImageView.kf.setImage(with: url)
+        if collectionView.tag == list.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
+            
+            cell.label.text = HomeTag.allCases[indexPath.item].rawValue
+            cell.label.font = .systemFont(ofSize: 16)
+            
+            switch mediaType {
+            case .movie:
+                if MediaType.allCases[indexPath.item] == .movie {
+                    cell.backgroundColor = .systemGray6
+                } else {
+                    cell.backgroundColor = .clear
+                }
+            case .tv:
+                if MediaType.allCases[indexPath.item] == .tv {
+                    cell.backgroundColor = .systemGray6
+                } else {
+                    cell.backgroundColor = .clear
+                }
+            case .all:
+                cell.backgroundColor = .clear
+            }
+            
+            return cell
         } else {
-            cell.posterImageView.image = UIImage(systemName: "xmark")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCollectionViewCell.identifier, for: indexPath) as! TVCollectionViewCell
+            
+            let item = list[collectionView.tag][indexPath.item]
+            
+            if let poster = item.poster {
+                let url = URL(string: "\(TMDBAPI.imageBaseURL)\(poster)")
+                cell.posterImageView.kf.setImage(with: url)
+            } else {
+                cell.posterImageView.image = UIImage(systemName: "xmark")
+            }
+            
+            cell.titleLabel.text = item.name
+            cell.voteAverageLabel.text = item.voteCountString
+            
+            return cell
         }
-        
-        cell.titleLabel.text = item.name
-        
-        cell.voteAverageLabel.text = item.voteCountString
-        
-        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = TVDetailViewController()
-        vc.id = list[collectionView.tag][indexPath.item].id
-        vc.isPresented = true
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
+        if collectionView.tag == list.count {
+            let type = MediaType.allCases[indexPath.item]
+            if type != mediaType {
+                mediaType = type
+            }
+        } else {
+            let vc = TVDetailViewController()
+            vc.id = list[collectionView.tag][indexPath.item].id
+            vc.isPresented = true
+            vc.mediaType = mediaType
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        }
     }
     
 }
@@ -120,8 +164,10 @@ extension TVViewController: UICollectionViewDelegate, UICollectionViewDataSource
 extension TVViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return apiList[collectionView.tag] == .topRated ? CGSize(width: 150, height: 300) : CGSize(width: 100, height: 200)
+        if collectionView.tag == list.count {
+            return .zero
+        }
+        return apiList[collectionView.tag] == .topRated(type: mediaType) ? CGSize(width: 150, height: 300) : CGSize(width: 100, height: 200)
     }
     
 }

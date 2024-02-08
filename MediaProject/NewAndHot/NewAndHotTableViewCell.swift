@@ -50,7 +50,7 @@ class NewAndHotTableViewCell: UITableViewCell {
         }
     }
     
-    convenience init(tagType: Tag) {
+    convenience init(tagType: NewAndHotTag) {
         self.init(style: .default, reuseIdentifier: NewAndHotTableViewCell.identifier)
         
 //        switch tagType {

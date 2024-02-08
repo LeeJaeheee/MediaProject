@@ -12,10 +12,11 @@ import Kingfisher
 class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
+    var mediaType: MediaType = .tv
  
     let tmdbManager = TMDBSessionManager.shared
     
-    lazy var apiList: [TMDBAPI] = [.Overview(id: id), .Cast(id: id), .Recommendation(id: id)]
+    lazy var apiList: [TMDBAPI] = [.Details(type: mediaType, id: id), .Cast(type: mediaType, id: id), .Recommendation(type: mediaType, id: id)]
     
     var tvDetail = TVDetailModel()
     var castList: [Cast] = []
@@ -30,7 +31,7 @@ class TVDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+  
         let group = DispatchGroup()
         
         group.enter()
@@ -54,7 +55,7 @@ class TVDetailViewController: BaseViewController {
         }
         
         group.enter()
-        tmdbManager.request(type: VideoModel.self, api: .video(id: id)) { result, error  in
+        tmdbManager.request(type: VideoModel.self, api: .video(type: mediaType, id: id)) { result, error  in
             if let result = result, !result.results.isEmpty, let url = URL(string: "https://www.youtube.com/embed/\(result.results[0].key)") {
                 self.mainView.videoView.load(URLRequest(url: url))
                 self.mainView.videoView.isHidden = false
@@ -123,7 +124,7 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch apiList[section] {
-        case .Overview:
+        case .Details:
             return 1
         case .Cast:
             return min(4, castList.count)
@@ -138,7 +139,7 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch apiList[indexPath.section] {
             
-        case .Overview:
+        case .Details:
             let cell = tableView.dequeueReusableCell(withIdentifier: OverviewTableViewCell.identifier, for: indexPath) as! OverviewTableViewCell
             cell.overviewLabel.text = tvDetail.convertedOverview
             return cell

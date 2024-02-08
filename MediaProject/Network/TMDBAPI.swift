@@ -8,21 +8,43 @@
 import Foundation
 import Alamofire
 
-enum MediaType: String {
-    case all
+enum MediaType: Int, CaseIterable {
     case movie
     case tv
+    case all
+    
+    var caseString: String {
+        switch self {
+        case .movie:
+            return "movie"
+        case .tv:
+            return "tv"
+        case .all:
+            //TODO: 나중에 고치기...
+            return "tv"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .movie:
+            return "영화"
+        case .tv:
+            return "TV"
+        case .all:
+            return ""
+        }
+    }
 }
 
 enum TMDBAPI: Equatable {
-    //TODO: 연관값 추가해서 미디어타입 정해주기
-    case trending
-    case topRated
-    case popular
-    case Overview(id: Int)
-    case Cast(id: Int)
-    case Recommendation(id: Int)
-    case video(id: Int)
+    case trending(type: MediaType)
+    case topRated(type: MediaType)
+    case popular(type: MediaType)
+    case Details(type: MediaType, id: Int)
+    case Cast(type: MediaType, id: Int)
+    case Recommendation(type: MediaType, id: Int)
+    case video(type: MediaType, id: Int)
     
     static var imageBaseURL: String { "https://image.tmdb.org/t/p/w500" }
     var baseURL: String { "https://api.themoviedb.org/3/" }
@@ -32,32 +54,32 @@ enum TMDBAPI: Equatable {
     
     var endpoint: URL {
         switch self {
-        case .trending:
-            URL(string: baseURL + "trending/movie/day")!
-        case .topRated:
-            URL(string: baseURL + "movie/top_rated")!
-        case .popular:
-            URL(string: baseURL + "movie/popular")!
-        case .Overview(let id):
-            URL(string: baseURL + "movie/\(id)")!
-        case .Cast(let id):
-            URL(string: baseURL + "movie/\(id)/credits")! //tv: aggregated_credits
-        case .Recommendation(let id):
-            URL(string: baseURL + "movie/\(id)/recommendations")!
-        case .video(id: let id):
-            URL(string: baseURL + "movie/\(id)/videos")!
+        case .trending(let type):
+            URL(string: baseURL + "trending/\(type.caseString)/day")!
+        case .topRated(let type):
+            URL(string: baseURL + "\(type.caseString)/top_rated")!
+        case .popular(let type):
+            URL(string: baseURL + "\(type.caseString)/popular")!
+        case .Details(let type, let id):
+            URL(string: baseURL + "\(type.caseString)/\(id)")!
+        case .Cast(let type, let id):
+            URL(string: baseURL + "\(type.caseString)/\(id)/\(type == .movie ? "credits" : "aggregate_credits")")! //tv: aggregate_credits
+        case .Recommendation(let type, let id):
+            URL(string: baseURL + "\(type.caseString)/\(id)/recommendations")!
+        case .video(let type, let id):
+            URL(string: baseURL + "\(type.caseString)/\(id)/videos")!
         }
     }
     
     var title: String {
         switch self {
-        case .trending:
-            return "추천 TV 콘텐츠"
-        case .topRated:
-            return "TOP 20 TV 콘텐츠"
-        case .popular:
-            return "인기 TV 콘텐츠"
-        case .Overview:
+        case .trending(let type):
+            return "추천 \(type.title) 콘텐츠"
+        case .topRated(let type):
+            return "TOP 20 \(type.title) 콘텐츠"
+        case .popular(let type):
+            return "인기 \(type.title) 콘텐츠"
+        case .Details:
             return "줄거리"
         case .Cast:
             return "출연"
@@ -76,7 +98,7 @@ enum TMDBAPI: Equatable {
             return TVModel.self
         case .popular:
             return TVModel.self
-        case .Overview:
+        case .Details:
             return TVDetailModel.self
         case .Cast:
             return CreditModel.self

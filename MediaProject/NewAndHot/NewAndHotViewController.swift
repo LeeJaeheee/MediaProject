@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Tag: CaseIterable {
+enum NewAndHotTag: CaseIterable {
     case upcoming
     case popular
     case top10Series
@@ -103,13 +103,13 @@ extension NewAndHotViewController: CollectionViewProtocol {
 extension NewAndHotViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Tag.allCases.count
+        return NewAndHotTag.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as! TagCollectionViewCell
         
-        cell.label.text = Tag.allCases[indexPath.item].title
+        cell.label.text = NewAndHotTag.allCases[indexPath.item].title
         
         return cell
     }

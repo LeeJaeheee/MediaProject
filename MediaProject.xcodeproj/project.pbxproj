@@ -101,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				D252D29D2B74B2240063D02E /* NewAndHotViewController.swift */,
+				D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */,
 			);
 			path = NewAndHot;
 			sourceTree = "<group>";
@@ -195,7 +196,6 @@
 				D2F1B8612B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift */,
 				D2F1B8632B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift */,
 				D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */,
-				D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

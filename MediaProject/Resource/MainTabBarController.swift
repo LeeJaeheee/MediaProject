@@ -15,13 +15,13 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        let nav1 = UINavigationController(rootViewController: TVViewController())
+        let vc = TVViewController()
         let nav2 = UINavigationController(rootViewController: NewAndHotViewController())
         let nav3 = UINavigationController(rootViewController: ProfileViewController())
         
-        nav1.tabBarItem.title = "홈"
-        nav1.tabBarItem.image = UIImage(systemName: "house")
-        nav1.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        vc.tabBarItem.title = "홈"
+        vc.tabBarItem.image = UIImage(systemName: "house")
+        vc.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         
         nav2.tabBarItem.title = "New & Hot"
         nav2.tabBarItem.image = UIImage(systemName: "play.rectangle.on.rectangle")
@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController {
         nav3.tabBarItem.image = UIImage(systemName: "arrow.down.circle")
         nav3.tabBarItem.selectedImage = UIImage(systemName: "arrow.down.circle.fill")
         
-        setViewControllers([nav1, nav2, nav3], animated: true)
+        setViewControllers([vc, nav2, nav3], animated: true)
     }
 
 }
