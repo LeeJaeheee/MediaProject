@@ -28,4 +28,14 @@ class BaseView: UIView {
     
     func configureView() { }
     
+    func setRoundView<T: UIView> (_ view: T) {
+        view.clipsToBounds = true
+        view.layer.cornerRadius = view.frame.width / 2
+    }
+    
+    func setBorder<T: UIView> (_ view: T, color: UIColor, width: CGFloat) {
+        view.layer.borderColor = color.cgColor
+        view.layer.borderWidth = width
+    }
+    
 }

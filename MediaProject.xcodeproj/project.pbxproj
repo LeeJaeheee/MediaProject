@@ -12,6 +12,13 @@
 		D252D2A02B74B2960063D02E /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */; };
 		D252D2A22B74B2BB0063D02E /* NewAndHotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */; };
 		D252D2A52B74B2FA0063D02E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */; };
+		D252D2A72B74F7B20063D02E /* ProfileTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A62B74F7B20063D02E /* ProfileTFView.swift */; };
+		D252D2A92B76F8AC0063D02E /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252D2A82B76F8AC0063D02E /* ProfileEditViewController.swift */; };
+		D2A537562B7A283300DB11F2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A537552B7A283300DB11F2 /* ProfileView.swift */; };
+		D2A537582B7A5AEE00DB11F2 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A537572B7A5AEE00DB11F2 /* UnsplashAPI.swift */; };
+		D2A5375A2B7A5CCF00DB11F2 /* UnsplashAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A537592B7A5CCF00DB11F2 /* UnsplashAPIManager.swift */; };
+		D2A5375C2B7A5EC800DB11F2 /* UnsplashSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A5375B2B7A5EC800DB11F2 /* UnsplashSearchViewController.swift */; };
+		D2A5375E2B7A5F1400DB11F2 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A5375D2B7A5F1400DB11F2 /* UnsplashModel.swift */; };
 		D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8162B68E1D0002DCFD5 /* AppDelegate.swift */; };
 		D2F1B8192B68E1D0002DCFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B8182B68E1D0002DCFD5 /* SceneDelegate.swift */; };
 		D2F1B81B2B68E1D0002DCFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F1B81A2B68E1D0002DCFD5 /* ViewController.swift */; };
@@ -51,6 +58,13 @@
 		D252D29F2B74B2960063D02E /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		D252D2A12B74B2BB0063D02E /* NewAndHotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndHotTableViewCell.swift; sourceTree = "<group>"; };
 		D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D252D2A62B74F7B20063D02E /* ProfileTFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTFView.swift; sourceTree = "<group>"; };
+		D252D2A82B76F8AC0063D02E /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		D2A537552B7A283300DB11F2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D2A537572B7A5AEE00DB11F2 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		D2A537592B7A5CCF00DB11F2 /* UnsplashAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIManager.swift; sourceTree = "<group>"; };
+		D2A5375B2B7A5EC800DB11F2 /* UnsplashSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSearchViewController.swift; sourceTree = "<group>"; };
+		D2A5375D2B7A5F1400DB11F2 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
 		D2F1B8132B68E1D0002DCFD5 /* MediaProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2F1B8162B68E1D0002DCFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2F1B8182B68E1D0002DCFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				D252D2A42B74B2FA0063D02E /* ProfileViewController.swift */,
+				D252D2A62B74F7B20063D02E /* ProfileTFView.swift */,
+				D252D2A82B76F8AC0063D02E /* ProfileEditViewController.swift */,
+				D2A537552B7A283300DB11F2 /* ProfileView.swift */,
+				D2A5375B2B7A5EC800DB11F2 /* UnsplashSearchViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -159,6 +177,9 @@
 				D2F1B8442B68ECCA002DCFD5 /* TVModel.swift */,
 				D2F1B86F2B6BA573002DCFD5 /* TMDBAPI.swift */,
 				D2F1B87F2B70BA7C002DCFD5 /* TMDBSessionManager.swift */,
+				D2A537572B7A5AEE00DB11F2 /* UnsplashAPI.swift */,
+				D2A537592B7A5CCF00DB11F2 /* UnsplashAPIManager.swift */,
+				D2A5375D2B7A5F1400DB11F2 /* UnsplashModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -290,24 +311,31 @@
 				D252D2A02B74B2960063D02E /* TagCollectionViewCell.swift in Sources */,
 				D2F1B8432B68EAA5002DCFD5 /* APIKey.swift in Sources */,
 				D2F1B84A2B690175002DCFD5 /* TVCollectionViewCell.swift in Sources */,
+				D2A5375E2B7A5F1400DB11F2 /* UnsplashModel.swift in Sources */,
 				D2F1B8722B6BCFA1002DCFD5 /* TVView.swift in Sources */,
 				D252D2A52B74B2FA0063D02E /* ProfileViewController.swift in Sources */,
 				D252D2A22B74B2BB0063D02E /* NewAndHotTableViewCell.swift in Sources */,
+				D252D2A72B74F7B20063D02E /* ProfileTFView.swift in Sources */,
 				D2F1B8642B6AED4B002DCFD5 /* RecommendationCollectionViewCell.swift in Sources */,
 				D252D29B2B74B19D0063D02E /* MainTabBarController.swift in Sources */,
 				D2F1B8742B6BD393002DCFD5 /* TVDetailView.swift in Sources */,
 				D2F1B85E2B6AE580002DCFD5 /* OverviewTableViewCell.swift in Sources */,
 				D2F1B8172B68E1D0002DCFD5 /* AppDelegate.swift in Sources */,
+				D2A537582B7A5AEE00DB11F2 /* UnsplashAPI.swift in Sources */,
 				D2F1B8702B6BA573002DCFD5 /* TMDBAPI.swift in Sources */,
+				D2A5375C2B7A5EC800DB11F2 /* UnsplashSearchViewController.swift in Sources */,
 				D2F1B8592B6A1899002DCFD5 /* BaseViewController.swift in Sources */,
 				D2F1B83D2B68E3EB002DCFD5 /* ReusableProtocol.swift in Sources */,
 				D2F1B85C2B6AC1D8002DCFD5 /* TVDetailViewController.swift in Sources */,
 				D2F1B83A2B68E389002DCFD5 /* TVViewController.swift in Sources */,
 				D252D29E2B74B2240063D02E /* NewAndHotViewController.swift in Sources */,
 				D2F1B8412B68E802002DCFD5 /* TMDBAPIManager.swift in Sources */,
+				D2A5375A2B7A5CCF00DB11F2 /* UnsplashAPIManager.swift in Sources */,
 				D2F1B8802B70BA7C002DCFD5 /* TMDBSessionManager.swift in Sources */,
+				D2A537562B7A283300DB11F2 /* ProfileView.swift in Sources */,
 				D2F1B8602B6AE768002DCFD5 /* CastTableViewCell.swift in Sources */,
 				D2F1B8622B6AEC2D002DCFD5 /* RecommendationTableViewCell.swift in Sources */,
+				D252D2A92B76F8AC0063D02E /* ProfileEditViewController.swift in Sources */,
 				D2F1B8472B68F90D002DCFD5 /* TVTableViewCell.swift in Sources */,
 				D2F1B86E2B6B9479002DCFD5 /* BaseView.swift in Sources */,
 				D2F1B8452B68ECCA002DCFD5 /* TVModel.swift in Sources */,
