@@ -18,6 +18,7 @@ class TMDBSessionManager {
     
     static let shared = TMDBSessionManager()
     
+    /*
     func request<T: Decodable>(type: T.Type, api: TMDBAPI, completionHandler: @escaping (T?, SeSACError?) -> Void) {
         
         var url = URLRequest(url: api.endpoint)
@@ -57,8 +58,9 @@ class TMDBSessionManager {
             
         }.resume()
     }
+     */
     
-    func requestConcurrency<T: Decodable>(type: T.Type, api: TMDBAPI) async throws -> T {
+    func request<T: Decodable>(type: T.Type, api: TMDBAPI) async throws -> T {
         
         var url = URLRequest(url: api.endpoint)
         url.addValue(APIKey.tmdb, forHTTPHeaderField: "Authorization")
@@ -88,7 +90,7 @@ class TMDBSessionManager {
             
             for api in apiList {
                 group.addTask {
-                    try await self.requestConcurrency(type: TVModel.self, api: api)
+                    try await self.request(type: TVModel.self, api: api)
                 }
             }
             

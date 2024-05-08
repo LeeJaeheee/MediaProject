@@ -31,7 +31,36 @@ class TVDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Task {
+            do {
+                async let tvDetailResult = tmdbManager.request(type: TVDetailModel.self, api: apiList[0])
+                async let castListResult = tmdbManager.request(type: CreditModel.self, api: apiList[1])
+                async let recommendListResult = tmdbManager.request(type: TVModel.self, api: apiList[2])
+                async let videoResult = tmdbManager.request(type: VideoModel.self, api: .video(type: mediaType, id: id))
+                
+                tvDetail = try await tvDetailResult
+                let castResult = try await castListResult
+                castList = castResult.cast
+                recommendList = try await recommendListResult.results
+                
+                let video = try await videoResult
+                if !video.results.isEmpty, let url = URL(string: "https://www.youtube.com/embed/\(video.results[0].key)") {
+                    self.mainView.videoView.load(URLRequest(url: url))
+                    self.mainView.videoView.isHidden = false
+                }
+                
+                configureView()
+                mainView.tableView.reloadData()
+                
+            } catch let error as SeSACError {
+                handleTMDBError(error)
+            } catch {
+                print(error)
+            }
+        }
   
+        /*
         let group = DispatchGroup()
         
         group.enter()
@@ -79,6 +108,7 @@ class TVDetailViewController: BaseViewController {
             self.configureView()
             self.mainView.tableView.reloadData()
         }
+         */
 
     }
     

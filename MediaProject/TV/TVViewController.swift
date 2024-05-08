@@ -48,8 +48,14 @@ class TVViewController: BaseViewController {
     func requestAPI() {
         
         Task {
-            list = try await tmdbManager.fetchTVModel(apiList: apiList)
-            mainView.tableView.reloadData()
+            do {
+                list = try await tmdbManager.fetchTVModel(apiList: apiList)
+                mainView.tableView.reloadData()
+            } catch let error as SeSACError {
+                handleTMDBError(error)
+            } catch {
+                print(error)
+            }
         }
 
     }
