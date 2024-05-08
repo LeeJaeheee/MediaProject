@@ -46,23 +46,12 @@ class TVViewController: BaseViewController {
     }
     
     func requestAPI() {
-        let group = DispatchGroup()
         
-        apiList.enumerated().forEach { i, type in
-            group.enter()
-            tmdbManager.request(type: TVModel.self, api: apiList[i]) { result, error  in
-                if let result {
-                    self.list[i] = result.results
-                } else {
-                    self.handleTMDBError(error)
-                }
-                group.leave()
-            }
+        Task {
+            list = try await tmdbManager.fetchTVModel(apiList: apiList)
+            mainView.tableView.reloadData()
         }
 
-        group.notify(queue: .main) {
-            self.mainView.tableView.reloadData()
-        }
     }
 }
 

@@ -57,4 +57,49 @@ class TMDBSessionManager {
             
         }.resume()
     }
+    
+    func requestConcurrency<T: Decodable>(type: T.Type, api: TMDBAPI) async throws -> T {
+        
+        var url = URLRequest(url: api.endpoint)
+        url.addValue(APIKey.tmdb, forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: url)
+        
+        guard let response = response as? HTTPURLResponse else {
+            throw SeSACError.invalidResponse
+        }
+        
+        guard response.statusCode == 200 else {
+            throw SeSACError.invalidResponse
+        }
+        
+        do {
+            let data = try JSONDecoder().decode(T.self, from: data)
+            return data
+        } catch {
+            throw SeSACError.invalidData
+        }
+        
+    }
+    
+    func fetchTVModel(apiList: [TMDBAPI]) async throws -> [[TVResult]] {
+        
+        return try await withThrowingTaskGroup(of: TVModel.self) { group in
+            
+            for api in apiList {
+                group.addTask {
+                    try await self.requestConcurrency(type: TVModel.self, api: api)
+                }
+            }
+            
+            var resultList: [[TVResult]] = []
+            for try await item in group {
+                resultList.append(item.results)
+            }
+            
+            return resultList
+            
+        }
+    }
+    
 }
